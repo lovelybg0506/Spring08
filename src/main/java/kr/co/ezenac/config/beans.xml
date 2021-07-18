@@ -5,10 +5,54 @@
 		xsi:schemaLocation="http://www.springframework.org/schema/beans
 			http://www.springframework.org/schema/beans/spring-beans.xsd">
 	
-	<bean id='obj1' class='kr.co.ezenac.beans.TestBean' lazy-init='true'></bean>
+	<bean id='obj1' class='kr.co.ezenac.beans.TestBean' lazy-init='true'/>
 	
 	 <bean id='obj2' class='kr.co.ezenac.beans.TestBean' lazy-init='true'>
-		<constructor-arg value='1000'></constructor-arg> <!-- 값을 넣는방법 -->
+		<constructor-arg value='100'></constructor-arg> </bean><!-- 값을 넣는방법 -->
+
+	 <bean id='obj3' class='kr.co.ezenac.beans.TestBean' lazy-init='true'>
+		<constructor-arg value='11.11'></constructor-arg> <!-- type을 적어주지않으면 String이 있을때 String으로 들어감 -->
+	</bean>
+
+	 <bean id='obj4' class='kr.co.ezenac.beans.TestBean' lazy-init='true'>
+		<constructor-arg value='문자열'></constructor-arg><!-- 우선순위 1순위 String -->
+	</bean>
+
+	 <bean id='obj5' class='kr.co.ezenac.beans.TestBean' lazy-init='true'>
+		<constructor-arg value='200' type='int'></constructor-arg>
+		<constructor-arg value='22.22' type='double'></constructor-arg>
+		<constructor-arg value='안녕하세요' type='java.lang.String'></constructor-arg>
+	</bean>
+
+	 <bean id='obj6' class='kr.co.ezenac.beans.TestBean' lazy-init='true'>
+		<constructor-arg value='반갑습니다' type='java.lang.String'></constructor-arg>
+		<constructor-arg value='33.33' type='double'></constructor-arg>
+		<constructor-arg value='300' type='int'></constructor-arg>
+	</bean>
+
+	 <bean id='obj7' class='kr.co.ezenac.beans.TestBean' lazy-init='true'>
+		<constructor-arg value='44.44' type='double' index='1'></constructor-arg> <!-- 만약 같은type이 여러개일경우 index로 순서를 정할수 있다. -->
+		<constructor-arg value='400' type='int' index='0'></constructor-arg>
+		<constructor-arg value='안녕하세요2' type='java.lang.String' index='2'></constructor-arg>
+	</bean>
+
+	 <bean id='obj8' class='kr.co.ezenac.beans.TestBean2' lazy-init='true'>
+		<constructor-arg>
+			<bean class='kr.co.ezenac.beans.DataBean'></bean>
+		</constructor-arg>
+		<constructor-arg>
+			<bean class='kr.co.ezenac.beans.DataBean'></bean>
+		</constructor-arg>
 	</bean>
 	
+	<bean id='data_bean' class='kr.co.ezenac.beans.DataBean' scope='prototype'></bean> <!-- prototype이면 getBean할때 객체가 생성됨 -->
+	
+	<bean id='obj9' class='kr.co.ezenac.beans.TestBean2' lazy-init='true'>
+		<constructor-arg ref='data_bean'></constructor-arg>
+		<constructor-arg ref='data_bean'></constructor-arg>
+	</bean>
 </beans>
+
+
+
+
